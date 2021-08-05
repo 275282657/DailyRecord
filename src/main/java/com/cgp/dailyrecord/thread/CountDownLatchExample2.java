@@ -20,7 +20,7 @@ public class CountDownLatchExample2 {
 		new Thread(() -> {
 			System.out.println(Thread.currentThread().getName() + " 主要工作中.");
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(10000);
 				latch.await();
 				System.out.println(Thread.currentThread().getName() + " 已完成主要工作，开始其他工作.");
 			} catch (InterruptedException e) {
@@ -31,7 +31,7 @@ public class CountDownLatchExample2 {
 		new Thread(() -> {
 			System.out.println(Thread.currentThread().getName() + " 主要工作中");
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(10000);
 				latch.await();
 				System.out.println(Thread.currentThread().getName() + " 已完成主要工作，开始其他工作.");
 			} catch (InterruptedException e) {
@@ -50,7 +50,6 @@ public class CountDownLatchExample2 {
 				latch.countDown();
 			}
 		}).start();
-
 		System.out.println("没有影响到我主线程");
 
 	}

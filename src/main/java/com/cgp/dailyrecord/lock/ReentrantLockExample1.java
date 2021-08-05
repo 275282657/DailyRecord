@@ -57,6 +57,80 @@ public class ReentrantLockExample1 {
 	public static void main(String[] args) {
 		ReentrantLock unfairLock = new ReentrantLock();
 		ReentrantLock fairLock = new ReentrantLock(true);
+		ReentrantLockExample1 reentrantLockExample1=new ReentrantLockExample1();
+		for (int i = 0; i < 2; i++) {
+			new Thread(()->{
+				reentrantLockExample1.lock(unfairLock);
+			}).start();
+		}
+
+	}
+
+	/**
+	 * lock()
+	 */
+	private void lock(ReentrantLock reentrantLock){
+		try {
+			System.out.println(Thread.currentThread().getName()+"我进来了");
+			if (reentrantLock.isLocked()){
+				System.out.println(Thread.currentThread().getName()+"锁已经被其他线程获取");
+			}
+			reentrantLock.lock();
+			System.out.println(Thread.currentThread().getName()+"我已经获取到锁了");
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}finally {
+			//判断当前线程是否持有锁
+			if(reentrantLock.isHeldByCurrentThread()){
+				reentrantLock.unlock();
+				System.out.println(Thread.currentThread().getName() + "我释放了锁");
+			}
+		}
+	}
+
+	/**
+	 * lockInterruptibly()
+	 */
+	private void lockInterruptibly(ReentrantLock reentrantLock){
+		try {
+			System.out.println(Thread.currentThread().getName()+"我进来了"+reentrantLock.isHeldByCurrentThread());
+			if (reentrantLock.isLocked()){
+				System.out.println(Thread.currentThread().getName()+"锁已经被其他线程获取");
+			}
+			reentrantLock.lockInterruptibly();
+			System.out.println(Thread.currentThread().getName()+"我已经获取到锁了");
+			Thread.sleep(2000L);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}finally {
+			if(reentrantLock.isHeldByCurrentThread()){
+				reentrantLock.unlock();
+				System.out.println(Thread.currentThread().getName() + "我释放了锁");
+			}
+		}
+	}
+
+	/**
+	 * tryLock()
+	 */
+	private void tryLock(ReentrantLock reentrantLock) {
+		try {
+			System.out.println(Thread.currentThread().getName()+"我进来了");
+			if (reentrantLock.tryLock()) {
+				System.out.println(Thread.currentThread().getName() + "我已经获取到锁了");
+				Thread.sleep(2000L);
+			}else {
+				System.out.println(Thread.currentThread().getName() + "我没有获取到锁");
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} finally {
+			if(reentrantLock.isHeldByCurrentThread()){
+				reentrantLock.unlock();
+				System.out.println(Thread.currentThread().getName() + "我释放了锁");
+			}
+		}
 	}
 
 
