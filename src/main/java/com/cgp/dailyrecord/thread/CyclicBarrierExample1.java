@@ -51,6 +51,7 @@ public class CyclicBarrierExample1 {
 		for (int i = 0; i < 7; i++) {
 			final int temp = i + 1;
 			new Thread(() ->{
+				"".equals("");
 				System.out.println(Thread.currentThread().getName() + "\t收集到第" + temp + "颗龙珠");
 				try {
 					Thread.sleep(500);
