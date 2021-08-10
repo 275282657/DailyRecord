@@ -1,4 +1,4 @@
-package com.cgp.dailyrecord.NIO.client;
+package com.cgp.dailyrecord.nio.client;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

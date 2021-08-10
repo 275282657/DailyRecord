@@ -1,4 +1,4 @@
-package com.cgp.dailyrecord.NIO.sever;
+package com.cgp.dailyrecord.nio.sever;
 
 
 import java.io.IOException;

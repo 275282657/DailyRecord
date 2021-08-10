@@ -10,6 +10,8 @@
         <module name="DailyRecord" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="DailyRecord" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
